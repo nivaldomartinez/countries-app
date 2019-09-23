@@ -35,7 +35,7 @@
         <ul>
           <li *ngFor="let lang of country.languages">
             <span>
-              <small>{{ lang.name }}</small>
+              <small>{{ lang.iso639_1 }}</small>
             </span>
           </li>
         </ul>
@@ -65,7 +65,11 @@
   </div>
 </div>
 
-<ngx-smart-modal #countryDetailModal identifier="countryDetailModal">
+<ngx-smart-modal #countryDetailModal 
+  [escapable]="false"
+  [dismissable]="false"
+  identifier="countryDetailModal" 
+  (onClose)="selectedCountry = null">
     <app-country-details *ngIf="selectedCountry" [selectedCountryName]="selectedCountry.name"></app-country-details>
     <button (click)="countryDetailModal.close()">Close</button>
   </ngx-smart-modal>

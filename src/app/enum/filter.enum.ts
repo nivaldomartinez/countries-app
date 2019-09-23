@@ -1,5 +1,5 @@
 export enum Filter {
-    languaje = "Languaje",
+    lang = "Language",
     region = "Continent",
     name = "Name",
     capital = "Capital City",
