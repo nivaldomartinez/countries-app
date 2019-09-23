@@ -1,0 +1,62 @@
+<div class="container">
+  <header class="header">
+    <h1 class="title">
+      Trip2
+    </h1>
+  </header>
+  <div class="title-filters">
+      <h2>Filter by</h2>
+  </div>
+  <div class="filters">
+    <select class="filter-select" name="filters" [(ngModel)]="selectedFilter">
+      <option [value]="undefined" disabled>Select a filter</option>
+      <option *ngFor="let filter of filters | keyvalue" [value]="filter['key']">
+        {{ filter['value'] }}
+      </option>
+    </select>
+    <input type="text" [(ngModel)]="filterValue" class="filter-value" [disabled]="!selectedFilter">
+    <input type="button" class="btn" value="Filter" (click)="filterCountries()" [disabled]="!selectedFilter">
+  </div>
+  <div class="content-countries">
+    <div class="country-card" *ngFor="let country of countries | paginate: { itemsPerPage: pageSize, currentPage: page }">
+      <div class="flag">
+          <div class="flag-img"></div> <!-- [ngStyle]="{'background-image': 'url(' + country.flag + ')'}" -->
+      </div>
+      <div class="country-name-capital">
+          <span>{{ country.name }}</span>  <br>
+          <span><small>{{ country.capital }}</small></span>
+      </div>
+      <div class="language">
+        <span><small><strong>Languages</strong></small></span>
+        <ul>
+          <li *ngFor="let lang of country.languages">
+            <span>
+              <small>{{ lang.name }}</small>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="currency">
+        <span><small><strong>Currencies</strong></small></span>
+        <ul>
+          <li *ngFor="let currency of country.currencies">
+            <span>
+              <small>{{ currency.code }} - {{ currency.symbol }}</small>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="region">
+        <span><small><strong>Continent</strong></small></span>
+        <ul>
+          <li>
+            <span><small>{{ country.region }}</small></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="pagination">
+        <pagination-controls (pageChange)="onChangePage($event)"></pagination-controls>
+    </div>
+  </div>
+</div>
