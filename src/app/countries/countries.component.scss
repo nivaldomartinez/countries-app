@@ -130,6 +130,10 @@
 	top:1px;
 }
 
+.btn-filter:disabled {
+	background-color:#4376a160;
+}
+
 
 @media screen and (max-width: 1005px) {
     .container .content-countries {

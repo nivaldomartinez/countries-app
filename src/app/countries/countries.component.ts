@@ -10,6 +10,7 @@ import { NgxSmartModalComponent } from 'ngx-smart-modal';
 })
 export class CountriesComponent implements OnInit {
   @ViewChild('countryDetailModal') countryModal: NgxSmartModalComponent;
+  @ViewChild('errorModal') errorModal: NgxSmartModalComponent;
   selectedCountry; // selected country, this is set with the user open country modal
   filters = Filter; // filter enum
   selectedFilter: Filter; // selected filter from 'select'
@@ -34,22 +35,24 @@ export class CountriesComponent implements OnInit {
       data => {
         this.countries = data;
       }
-    ).catch(error => {
-      console.log(error);
-    })
+    )
   }
 
   /**
    * this get filtered countries
    */
   filterCountries() {
-    this.service.getFilteredCountries(this.selectedFilter, this.filterValue.toLowerCase()).then(
-      data => {
-        this.countries = data;
-      }
-    ).catch(resp => {
-      
-    })
+    if (this.filterValue) {
+      this.service.getFilteredCountries(this.selectedFilter, this.filterValue.toLowerCase()).then(
+        data => {
+          this.countries = data;
+        }
+      ).catch(() => {
+        this.errorModal.open();
+      })
+    } else {
+      this.retrieveData();
+    }
   }
 
   /**

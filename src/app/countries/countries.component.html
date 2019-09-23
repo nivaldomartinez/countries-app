@@ -15,7 +15,7 @@
       </option>
     </select>
     <input type="text" [(ngModel)]="filterValue" 
-    [placeholder]="selectedFilter ? 'Please enter the '+ selectedFilter : 'Value'" 
+    placeholder="Please type a value" 
     class="filter-value" 
     [disabled]="!selectedFilter"
     (keyup)="onPressEnter($event)">
@@ -71,5 +71,9 @@
   identifier="countryDetailModal" 
   (onClose)="selectedCountry = null">
     <app-country-details *ngIf="selectedCountry" [selectedCountryName]="selectedCountry.name"></app-country-details>
-    <button (click)="countryDetailModal.close()">Close</button>
+  </ngx-smart-modal>
+
+  <ngx-smart-modal #errorModal
+  identifier="errorModal">
+  no information found for '{{ filterValue }}'
   </ngx-smart-modal>
