@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountriesService } from './countries.service';
 import { Filter } from './../enum/filter.enum';
+import { NgxSmartModalComponent } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-countries',
@@ -8,7 +9,8 @@ import { Filter } from './../enum/filter.enum';
   styleUrls: ['./countries.component.scss']
 })
 export class CountriesComponent implements OnInit {
-
+  @ViewChild('countryDetailModal') countryModal: NgxSmartModalComponent;
+  selectedCountry; // selected country, this is set with the user open country modal
   filters = Filter; // filter enum
   selectedFilter: Filter; // selected filter from 'select'
   filterValue: string; // value entereb by the user to filter
@@ -45,17 +47,37 @@ export class CountriesComponent implements OnInit {
       data => {
         this.countries = data;
       }
-    ).catch(error => {
-      console.log(error);
+    ).catch(resp => {
+      
     })
   }
 
   /**
+   * this open a modal with the country details
+   * @param country country selected
+   */
+  openCountryDetails(country) {
+    this.countryModal.open();
+    this.selectedCountry = country;
+  }
+
+  /**
    * this execute when user select a page
+   * @param event ngx-pagination event
    */
   onChangePage(event) {
     this.page = event;
     window.scroll(0,0);
+  }
+
+  /**
+   * this search filtered countries when user press enter
+   * @param event keyup event
+   */
+  onPressEnter(event) {
+    if (event.code === 'Enter') {
+      this.filterCountries();
+    }
   }
 
 }

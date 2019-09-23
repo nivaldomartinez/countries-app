@@ -14,11 +14,15 @@
         {{ filter['value'] }}
       </option>
     </select>
-    <input type="text" [(ngModel)]="filterValue" class="filter-value" [disabled]="!selectedFilter">
-    <input type="button" class="btn" value="Filter" (click)="filterCountries()" [disabled]="!selectedFilter">
+    <input type="text" [(ngModel)]="filterValue" 
+    [placeholder]="selectedFilter ? 'Please enter the '+ selectedFilter : 'Value'" 
+    class="filter-value" 
+    [disabled]="!selectedFilter"
+    (keyup)="onPressEnter($event)">
+    <button class="btn-filter" (click)="filterCountries()" [disabled]="!selectedFilter">Filter</button>
   </div>
   <div class="content-countries">
-    <div class="country-card" *ngFor="let country of countries | paginate: { itemsPerPage: pageSize, currentPage: page }">
+    <div class="country-card" (click)="openCountryDetails(country)" *ngFor="let country of countries | paginate: { itemsPerPage: pageSize, currentPage: page }">
       <div class="flag">
           <div class="flag-img"></div> <!-- [ngStyle]="{'background-image': 'url(' + country.flag + ')'}" -->
       </div>
@@ -60,3 +64,8 @@
     </div>
   </div>
 </div>
+
+<ngx-smart-modal #countryDetailModal identifier="countryDetailModal">
+    <app-country-details *ngIf="selectedCountry" [selectedCountryName]="selectedCountry.name"></app-country-details>
+    <button (click)="countryDetailModal.close()">Close</button>
+  </ngx-smart-modal>

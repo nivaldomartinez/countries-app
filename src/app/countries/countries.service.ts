@@ -24,7 +24,14 @@ export class CountriesService {
    * @param value 
    */
   getFilteredCountries(filter: Filter, value: string) {
-    console.log(filter);
     return this.http.get(`${environment.api_url}${filter}/${value}`).toPromise();
+  }
+
+  /**
+   * this get country by name
+   * @param name name of the country
+   */
+  getCountryByName(name: string) {
+    return this.http.get(`${environment.api_url}name/${name}?fullText=true`).toPromise();
   }
 }
