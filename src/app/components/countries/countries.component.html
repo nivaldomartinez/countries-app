@@ -1,7 +1,7 @@
 <div class="container">
   <header class="header">
     <h1 class="title">
-      Trip2
+      Countries
     </h1>
   </header>
   <div class="title-filters">
@@ -19,12 +19,18 @@
     class="filter-value" 
     [disabled]="!selectedFilter"
     (keyup)="onPressEnter($event)">
-    <button class="btn-filter" (click)="filterCountries()" [disabled]="!selectedFilter">Filter</button>
+    <button class="btn-filter" 
+      (click)="filterCountries()" 
+      [disabled]="!selectedFilter">Filter</button>
   </div>
   <div class="content-countries">
-    <div class="country-card" (click)="openCountryDetails(country)" *ngFor="let country of countries | paginate: { itemsPerPage: pageSize, currentPage: page }">
+    <div class="country-card" 
+      (click)="openCountryDetails(country)" 
+      *ngFor="let country of countries | paginate: { itemsPerPage: pageSize, currentPage: page }">
       <div class="flag">
-          <div class="flag-img"></div> <!-- [ngStyle]="{'background-image': 'url(' + country.flag + ')'}" -->
+          <div class="flag-img" 
+            [ngStyle]="{'background-image': 'url(' + country.flag + ')'}">
+          </div>
       </div>
       <div class="country-name-capital">
           <span>{{ country.name }}</span>  <br>
@@ -60,7 +66,8 @@
       </div>
     </div>
     <div class="pagination">
-        <pagination-controls (pageChange)="onChangePage($event)"></pagination-controls>
+        <pagination-controls (pageChange)="onChangePage($event)">
+        </pagination-controls>
     </div>
   </div>
 </div>
@@ -70,7 +77,9 @@
   [dismissable]="false"
   identifier="countryDetailModal" 
   (onClose)="selectedCountry = null">
-    <app-country-details *ngIf="selectedCountry" [selectedCountryName]="selectedCountry.name"></app-country-details>
+    <app-country-details *ngIf="selectedCountry" 
+      [selectedCountryName]="selectedCountry.name">
+    </app-country-details>
   </ngx-smart-modal>
 
   <ngx-smart-modal #errorModal

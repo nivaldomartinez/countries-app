@@ -1,0 +1,58 @@
+<div class="container" *ngIf="country">
+  <header class="header">
+    <div class="country-flag" [ngStyle]="{'background-image': 'url(' + country.flag + ')'}"></div>
+    <h2>{{ country.name }} ({{ country.alpha3Code }})</h2>
+    <small>{{ country.capital }}</small>
+  </header>
+  <div class="content-map">
+    <agm-map class="agm-map"
+      [latitude]="country.latlng[0]" 
+      [longitude]="country.latlng[1]" 
+      [zoom]="6"
+      [streetViewControl]="false"
+      [zoomControl]="false">
+    </agm-map>
+  </div>
+  <div class="country-data">
+    <!-- Population -->
+    <div class="card-grid">
+        <span><strong>Population:</strong></span>
+      <div class="data-item span4">
+        <span>{{ country.population | number }}</span>
+      </div>
+    </div>
+    <!-- end Population -->
+    <!-- Subregion -->
+    <div class="card-grid">
+        <span><strong>Subregion:</strong></span>
+      <div class="data-item span4">
+        <span>{{ country.subregion }}</span>
+      </div>
+    </div>
+    <!-- end Subregion -->
+    <!-- Languages -->
+    <div class="card-grid">
+        <span><strong>Languages:</strong></span>
+      <div class="data-item" *ngFor="let lang of country.languages">
+        <span>{{ lang.name }}</span>
+      </div>
+    </div>
+    <!-- end Languages -->
+    <!-- Borders -->
+    <div class="card-grid" *ngIf="country.borders.length">
+      <span><strong>Borders:</strong></span>
+      <div class="data-item" *ngFor="let border of country.borders">
+        <span>{{ border }}</span>
+      </div>
+    </div>
+    <!-- end Borders -->
+    <!-- Top Level Domain -->
+    <div class="card-grid">
+        <span><strong>Domain:</strong></span>
+      <div class="data-item" *ngFor="let domain of country.topLevelDomain">
+        <span>{{ domain }}</span>
+      </div>
+    </div>
+    <!-- end Top Level Domain -->
+  </div>
+</div>

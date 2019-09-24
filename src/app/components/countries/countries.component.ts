@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CountriesService } from './countries.service';
-import { Filter } from './../enum/filter.enum';
+import { CountriesService } from '../../services/countries/countries.service';
+import { Filter } from '../../enum/filter.enum';
 import { NgxSmartModalComponent } from 'ngx-smart-modal';
 
 @Component({
@@ -43,7 +43,9 @@ export class CountriesComponent implements OnInit {
    */
   filterCountries() {
     if (this.filterValue) {
-      this.service.getFilteredCountries(this.selectedFilter, this.filterValue.toLowerCase()).then(
+      this.service
+      .getFilteredCountries(this.selectedFilter, this.filterValue.toLowerCase())
+      .then(
         data => {
           this.countries = data;
         }

@@ -1,3 +1,6 @@
+/**
+ * Filter enum
+ */
 export enum Filter {
     lang = "Language",
     region = "Continent",

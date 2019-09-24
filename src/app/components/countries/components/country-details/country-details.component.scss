@@ -1,0 +1,58 @@
+.agm-map {
+    height: 200px;
+  }
+
+  .container .header {
+    text-align: center;
+    padding: 10px;
+
+    h2 {
+      padding: 0;
+      margin: 0;
+    }
+
+    .country-flag {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      margin: 0 auto;
+      border: 1px solid rgba(0, 0, 0, 0.171);
+    }
+  }
+
+  .container .country-data {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px 0px;
+  }
+
+  .container .country-data .card-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 3px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.212);
+  }
+
+  .span4 {
+    grid-column: span 4;
+  }
+
+  .container .country-data .card-grid .data-item {
+    padding: 3px;
+
+    span {
+      background-color: #0f1218;
+      color: white;
+      border-radius: 3px;
+      padding: 3px;
+      font-weight: 800;
+    }
+  }

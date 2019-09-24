@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Filter } from '../enum/filter.enum';
+import { Filter } from '../../enum/filter.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,10 @@ export class CountriesService {
    * this get all countries
    */
   getCountries() {
-    return this.http.get(`${environment.api_url}all?fields=flag;name;capital;languages;region;currencies`).toPromise();
+    const complementUrl = "all?fields=flag;name;capital;languages;region;currencies"
+    return this.http
+               .get(`${environment.api_url}${complementUrl}`)
+               .toPromise();
   }
 
   /**
@@ -23,8 +26,10 @@ export class CountriesService {
    * @param filter 
    * @param value 
    */
-  getFilteredCountries(filter: Filter, value: string) {
-    return this.http.get(`${environment.api_url}${filter}/${value}`).toPromise();
+  getFilteredCountries(filter: Filter, filterValue: string) {
+    return this.http
+               .get(`${environment.api_url}${filter}/${filterValue}`)
+               .toPromise();
   }
 
   /**
@@ -32,6 +37,8 @@ export class CountriesService {
    * @param name name of the country
    */
   getCountryByName(name: string) {
-    return this.http.get(`${environment.api_url}name/${name}?fullText=true`).toPromise();
+    return this.http
+               .get(`${environment.api_url}name/${name}?fullText=true`)
+               .toPromise();
   }
 }
