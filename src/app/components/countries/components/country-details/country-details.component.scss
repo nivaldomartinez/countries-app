@@ -56,3 +56,26 @@
       font-weight: 800;
     }
   }
+
+@media screen and (max-width: 768px) {
+    .container .content-countries {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-countries .pagination {
+        grid-column: 1 / 3;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+  .container .country-data .card-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .container .country-data .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
